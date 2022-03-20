@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../helper/ui_helper.dart';
 
 class SearchWidget extends StatelessWidget {
@@ -28,7 +29,9 @@ class SearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       bottom: realH(73),
-      right: realW((68.0 - 320) - (68.0 * currentExplorePercent!) + (347 - 68.0) * currentSearchPercent!),
+      right: realW((68.0 - 320) -
+          (68.0 * currentExplorePercent!) +
+          (347 - 68.0) * currentSearchPercent!),
       child: GestureDetector(
         onTap: () {
           animateSearch!(!isSearchOpen!);
@@ -54,7 +57,8 @@ class SearchWidget extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(realW(36))),
               boxShadow: [
-                BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.3), blurRadius: realW(36)),
+                BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.3), blurRadius: realW(36)),
               ]),
         ),
       ),

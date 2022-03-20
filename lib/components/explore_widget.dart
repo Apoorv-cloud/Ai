@@ -1,5 +1,6 @@
 import 'package:emka_gps/providers/language.dart';
 import 'package:flutter/material.dart';
+
 import '../helper/ui_helper.dart';
 
 class ExploreWidget extends StatelessWidget {
@@ -7,7 +8,7 @@ class ExploreWidget extends StatelessWidget {
 
   final double? currentExplorePercent;
 
-final Language? language;
+  final Language? language;
   final Function(bool)? animateExplore;
 
   final Function(DragUpdateDetails)? onVerticalDragUpdate;
@@ -51,8 +52,11 @@ final Language? language;
               height: realH(122 + (766 - 122) * currentExplorePercent!),
               decoration: BoxDecoration(
                   gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-                    Color(0xFF59C2FF),
-                    Color(0xFF1270E3),
+                    Color.fromRGBO(255, 189, 89, 1),
+                    Color.fromRGBO(255, 145, 77, 1),
+
+                    //Color(0xFF59C2FF),
+                    //Color(0xFF1270E3),
                   ]),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(

@@ -1,15 +1,13 @@
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:emka_gps/api/api_services.dart';
 import 'package:emka_gps/global/app_colors.dart';
-import 'package:emka_gps/main.dart';
 import 'package:emka_gps/models/device.dart';
 import 'package:emka_gps/providers/app_provider.dart';
 import 'package:emka_gps/providers/language.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:arabic_numbers/arabic_numbers.dart';
 
 const d_grey = Color(0xFFEDECF2);
 
@@ -97,10 +95,10 @@ class _DevicesRedesignPageState extends State<DevicesRedesignPage> {
                     cursorColor: Colors.white,
                     style: TextStyle(color: Colors.white, fontSize: 20),
                     controller: _searchController,
-                    decoration: InputDecoration(
-                      labelText: _language.tSearch(),
-                      labelStyle: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
+                    //decoration: InputDecoration(
+                    //labelText: _language.tSearch(),
+                    //labelStyle: TextStyle(fontSize: 20, color: Colors.white),
+                    //),
                     onChanged: (value) {
                       _searchResults.clear();
                       _devices.forEach((item) {
@@ -221,12 +219,12 @@ class _DevicesRedesignPageState extends State<DevicesRedesignPage> {
                         padding: const EdgeInsets.only(left: 20),
                         child: Container(
                           // height: 10,
-                           padding: const EdgeInsets.only(right: 5),
+                          padding: const EdgeInsets.only(right: 5),
 
                           child: lastupdate(item.lastUpdate),
                         ),
                       ),
-                    /*  Padding(
+                      /*  Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Container(
                           height: 10,
@@ -238,7 +236,8 @@ class _DevicesRedesignPageState extends State<DevicesRedesignPage> {
                               borderRadius: BorderRadius.circular(30)),
                         ),
                       ),
-                  */  ],
+                  */
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -390,8 +389,8 @@ class _DevicesRedesignPageState extends State<DevicesRedesignPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [              Colors.blue,
-
+            colors: [
+              Colors.blue,
               Color(0xFFFFFFFF),
             ],
           ));
@@ -403,9 +402,7 @@ class _DevicesRedesignPageState extends State<DevicesRedesignPage> {
             end: Alignment.bottomCenter,
             colors: [
               Colors.red,
-              
-                            Color(0xFFFFFFFF),
-
+              Color(0xFFFFFFFF),
             ],
           ));
   }

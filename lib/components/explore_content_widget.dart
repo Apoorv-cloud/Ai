@@ -2,11 +2,10 @@ import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:emka_gps/models/device.dart';
 import 'package:emka_gps/models/position.dart';
 import 'package:emka_gps/providers/language.dart';
-import 'package:emka_gps/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../helper/ui_helper.dart';
 import 'package:flutter_sms/flutter_sms.dart';
+
+import '../helper/ui_helper.dart';
 
 //Language _language = Language();
 
@@ -212,7 +211,7 @@ class ExploreContentWidget extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                          ListTile(
+                                      ListTile(
                                         minLeadingWidth: 10,
                                         leading: Icon(
                                           Icons.speed_outlined,
@@ -238,7 +237,6 @@ class ExploreContentWidget extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                    
                                       ListTile(
                                         minLeadingWidth: 10,
                                         leading: Icon(
@@ -264,7 +262,7 @@ class ExploreContentWidget extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                    ListTile(
+                                      ListTile(
                                         minLeadingWidth: 10,
                                         leading: Icon(
                                           Icons.device_thermostat,
@@ -627,16 +625,17 @@ class ExploreContentWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           SizedBox(
-                              height:
-                                  MediaQuery.of(context).size.height * 0.1),
+                              height: MediaQuery.of(context).size.height * 0.1),
                           Container(
-                                                        margin: EdgeInsets.symmetric(horizontal: 30),
-
+                            margin: EdgeInsets.symmetric(horizontal: 30),
                             child: Text(
-                              
-                              language!.tNoSelectedDevice(), textAlign: TextAlign.center,
+                              language!.tNoSelectedDevice(),
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                  color: Colors.grey[200], fontSize: 20,letterSpacing: 1.0,),
+                                color: Colors.white,
+                                fontSize: 20,
+                                letterSpacing: 1.0,
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -645,13 +644,17 @@ class ExploreContentWidget extends StatelessWidget {
                           Container(
                             margin: EdgeInsets.symmetric(horizontal: 30),
                             child: Text(
-                              language!.tHomeSelectDevice(), textAlign: TextAlign.center,
+                              language!.tHomeSelectDevice(),
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                  color: Colors.grey[350], fontSize: 18,),
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                           SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.25),
+                              height:
+                                  MediaQuery.of(context).size.height * 0.25),
                           Container(
                             child:
                                 Image.asset('assets/images/truckExplore2.gif'),

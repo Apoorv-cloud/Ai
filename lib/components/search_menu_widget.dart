@@ -1,12 +1,13 @@
 import 'package:emka_gps/providers/language.dart';
 import 'package:flutter/material.dart';
+
 import '../helper/ui_helper.dart';
 
 class SearchMenuWidget extends StatelessWidget {
   final double? currentSearchPercent;
   final Language? language;
 
-  const SearchMenuWidget({Key? key, this.currentSearchPercent,this.language})
+  const SearchMenuWidget({Key? key, this.currentSearchPercent, this.language})
       : super(key: key);
 
   @override
@@ -23,7 +24,8 @@ class SearchMenuWidget extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: realW(20.0)),
                   child: Row(
                     children: <Widget>[
-                      _buildSearchMenuItem(Icons.car_rental, language!.tDevices()),
+                      _buildSearchMenuItem(
+                          Icons.car_rental, language!.tDevices()),
                       Padding(
                         padding: EdgeInsets.only(left: realW(16)),
                       ),
@@ -47,19 +49,19 @@ class SearchMenuWidget extends StatelessWidget {
           Icon(
             icon,
             size: realW(30),
-            color: Colors.blue,
+            color: Colors.orange,
           ),
           Padding(
             padding: EdgeInsets.only(left: realW(12)),
           ),
           Text(
             text,
-            style: TextStyle(color: Colors.blue, fontSize: realW(18)),
+            style: TextStyle(color: Colors.orange, fontSize: realW(18)),
           )
         ],
       ),
       decoration: BoxDecoration(
-        color: const Color(0xFF379BF2).withOpacity(0.2),
+        color: Colors.orange.withOpacity(0.2),
         borderRadius: BorderRadius.all(Radius.circular(realW(30))),
       ),
     ));

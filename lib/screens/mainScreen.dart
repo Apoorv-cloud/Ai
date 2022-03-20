@@ -1,6 +1,6 @@
 import 'package:emka_gps/api/notifcationService.dart';
+import 'package:emka_gps/global/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
 class NotifTestScreen extends StatefulWidget {
@@ -21,6 +21,7 @@ class _NotifTestScreenState extends State<NotifTestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.lightBackground,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,30 +29,50 @@ class _NotifTestScreenState extends State<NotifTestScreen> {
           children: [
             GestureDetector(
               onTap: () {
-                NotificationService().cancelAllNotifications();
+                //NotificationService().showNotification(1, "Renault 9999 TU 999", "SURVITESSE", 10);
+
+                NotificationService().showNotification(
+                    1, "Device detected!", "All set for transmission", 3);
               },
               child: Container(
-                height: 40,
+                height: 50,
                 width: 200,
-                color: Colors.red,
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                    border: Border.all(
+                      color: Colors.green,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: Center(
                   child: Text(
-                    "Cancel All Notifications",
+                    "Show Notification",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
             GestureDetector(
               onTap: () {
-                NotificationService().showNotification(1, "Renault 9999 TU 999", "SURVITESSE", 10);
+                NotificationService().cancelAllNotifications();
               },
               child: Container(
-                height: 40,
+                margin: EdgeInsets.only(top: 20),
+                height: 50,
                 width: 200,
-                color: Colors.green,
+                decoration: BoxDecoration(
+                    color: Colors.deepOrange,
+                    border: Border.all(
+                      color: Colors.deepOrange,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: Center(
                   child: Text(
-                    "Show Notification"
+                    "Cancel Notification",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

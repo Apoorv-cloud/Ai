@@ -67,8 +67,8 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.deepOrange,
         ),
-        //initialRoute: '/googleMap',
-        initialRoute: '/loadingSpin',
+        initialRoute: '/googleMap',
+        //initialRoute: '/loadingSpin',
         //   initialRoute: Provider.of<SessionProvider>(context, listen: false).loading ? '/home' : '/',
         onGenerateRoute: routeGenerator.generateRoute,
       ),

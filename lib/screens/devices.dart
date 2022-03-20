@@ -1,15 +1,13 @@
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:emka_gps/api/api_services.dart';
 import 'package:emka_gps/global/app_colors.dart';
-import 'package:emka_gps/main.dart';
 import 'package:emka_gps/models/device.dart';
 import 'package:emka_gps/providers/app_provider.dart';
 import 'package:emka_gps/providers/language.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:arabic_numbers/arabic_numbers.dart';
 
 const d_grey = Color(0xFFEDECF2);
 
@@ -68,76 +66,77 @@ class _DevicesPageState extends State<DevicesPage> {
   Widget build(BuildContext context) {
     _appProvider = Provider.of<AppProvider>(context);
     _devices = _appProvider.getDevices();
-return new WillPopScope(
-    onWillPop: () async => false,
-    child:
-    new Scaffold(
-      appBar: !_searchClicked
-          ? AppBar(
-              backgroundColor:AppColors.appBarBackground,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () => Navigator.pop(context),
-              ),
-              title: Text(_language.tDevices()),
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () => setState(() => _searchClicked = true),
+    return new WillPopScope(
+        onWillPop: () async => false,
+        child: new Scaffold(
+          appBar: !_searchClicked
+              ? AppBar(
+                  backgroundColor: AppColors.appBarBackground,
+                  leading: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  title: Text(_language.tDevices()),
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () => setState(() => _searchClicked = true),
+                    )
+                  ],
                 )
-              ],
-            )
-          : AppBar(
-              backgroundColor: AppColors.appBarBackground,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () => setState(() => _searchClicked = false),
-              ),
-              title: TextField(
-                autofocus: true,
-                cursorColor: Colors.white,
-                style: TextStyle(color: Colors.white, fontSize: 20),
-                controller: _searchController,
-                decoration: InputDecoration(
-                  labelText: _language.tSearch(),
-                  labelStyle: TextStyle(fontSize: 20, color: Colors.white),
+              : AppBar(
+                  backgroundColor: AppColors.appBarBackground,
+                  leading: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () => setState(() => _searchClicked = false),
+                  ),
+                  title: TextField(
+                    autofocus: true,
+                    cursorColor: Colors.white,
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    controller: _searchController,
+
+                    //decoration: InputDecoration(
+                    //labelText: _language.tSearch(),
+                    //labelStyle: TextStyle(fontSize: 18, color: Colors.white
+                    //),
+                    //),//
+                    onChanged: (value) {
+                      _searchResults.clear();
+                      _devices.forEach((item) {
+                        if (item.name!
+                            .toLowerCase()
+                            .contains(value.toLowerCase())) {
+                          _searchResults.add(item);
+                        }
+                      });
+                      setState(() {});
+                    },
+                  ),
                 ),
-                onChanged: (value) {
-                  _searchResults.clear();
-                  _devices.forEach((item) {
-                    if (item.name!
-                        .toLowerCase()
-                        .contains(value.toLowerCase())) {
-                      _searchResults.add(item);
-                    }
-                  });
-                  setState(() {});
-                },
-              ),
+          body: Container(
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            child: SmartRefresher(
+              controller: _refreshController,
+              enablePullDown: true,
+              onRefresh: _onRefresh,
+              child: _searchResults.isNotEmpty && _searchController.text != ''
+                  ? ListView.builder(
+                      itemCount: _searchResults.length,
+                      itemBuilder: (context, index) {
+                        return _listViewElementWidget(_searchResults[index]);
+                      },
+                    )
+                  : ListView.builder(
+                      itemCount: _devices.length,
+                      itemBuilder: (context, index) {
+                        return _listViewElementWidget(_devices[index]);
+                      },
+                    ),
             ),
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-        child: SmartRefresher(
-          controller: _refreshController,
-          enablePullDown: true,
-          onRefresh: _onRefresh,
-          child: _searchResults.isNotEmpty && _searchController.text != ''
-              ? ListView.builder(
-                  itemCount: _searchResults.length,
-                  itemBuilder: (context, index) {
-                    return _listViewElementWidget(_searchResults[index]);
-                  },
-                )
-              : ListView.builder(
-                  itemCount: _devices.length,
-                  itemBuilder: (context, index) {
-                    return _listViewElementWidget(_devices[index]);
-                  },
-                ),
-        ),
-      ),
-    )
-);}
+          ),
+        ));
+  }
 
   //ListView element widget
   Widget _listViewElementWidget(Device item) {
@@ -160,7 +159,8 @@ return new WillPopScope(
                     Row(
                       children: <Widget>[
                         Container(
-                          decoration: getIcon(_appProvider.getMotionId(item.id!)),
+                          decoration:
+                              getIcon(_appProvider.getMotionId(item.id!)),
                           height: 30,
                           width: 30,
                           child: Center(
@@ -187,8 +187,8 @@ return new WillPopScope(
                                   width: 70,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
-                                    color:_appProvider.getMotionId(item.id!)
-                                        ? Colors.blue
+                                    color: _appProvider.getMotionId(item.id!)
+                                        ? Colors.orange
                                         : Colors.red,
                                   ),
                                   child: Center(
@@ -225,8 +225,9 @@ return new WillPopScope(
                     height: 10,
                     width: 10,
                     decoration: BoxDecoration(
-                        color:
-                            _appProvider.getMotionId(item.id!) ? Colors.blue : Colors.red,
+                        color: _appProvider.getMotionId(item.id!)
+                            ? Colors.orange
+                            : Colors.red,
                         borderRadius: BorderRadius.circular(30)),
                   ),
                 ),
@@ -241,7 +242,7 @@ return new WillPopScope(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     onPressed: () {
-                       _appProvider.setSelectedId(id: item.id);
+                      _appProvider.setSelectedId(id: item.id);
                       Navigator.of(context).pushNamed("/todayTrip");
                     },
                     child: Row(
@@ -255,8 +256,7 @@ return new WillPopScope(
                             style: TextStyle(
                                 fontSize: 14,
                                 letterSpacing: 2.2,
-                                color: Colors.black)
-                                ),
+                                color: Colors.black)),
                       ],
                     ),
                   ),

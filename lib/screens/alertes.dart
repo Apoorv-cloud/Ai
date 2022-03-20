@@ -1,3 +1,4 @@
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:emka_gps/api/api_services.dart';
 import 'package:emka_gps/models/events.dart';
 import 'package:emka_gps/models/maintenance.dart';
@@ -6,10 +7,9 @@ import 'package:emka_gps/providers/language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:arabic_numbers/arabic_numbers.dart';
-import 'package:intl/intl.dart';
 
 const d_grey = Color(0xFFEDECF2);
 
@@ -102,7 +102,7 @@ class _AlerteState extends State<Alerte> {
         onWillPop: () async => false,
         child: new Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xFF149cf7),
+            backgroundColor: Colors.orange,
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pushNamed('/home'),
@@ -178,7 +178,7 @@ class _AlerteState extends State<Alerte> {
                         }
 
                         _appProvider.setEventMarker(item.deviceId);
-                                                isEventDetailLoading = false;
+                        isEventDetailLoading = false;
 
                         Navigator.of(context)
                             .pushNamed('/eventDetails', arguments: item);
@@ -227,7 +227,7 @@ class _AlerteState extends State<Alerte> {
                                           Text(
                                             getEventType(item.type.toString()),
                                             style: GoogleFonts.nunito(
-                                                color: Colors.blue[900],
+                                                color: Colors.orange[900],
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -310,7 +310,7 @@ class _AlerteState extends State<Alerte> {
               ],
             )),
         Divider(
-          color: Colors.blue[900],
+          color: Colors.orange[900],
         )
       ],
     );
@@ -324,7 +324,7 @@ class _AlerteState extends State<Alerte> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SpinKitFadingFour(
-                color: Colors.blue,
+                color: Colors.orange,
                 size: 50.0,
               ),
               SizedBox(
@@ -332,7 +332,7 @@ class _AlerteState extends State<Alerte> {
               ),
               Text(
                 _language.tLoading(),
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.orange),
               ),
             ],
           )),
@@ -348,8 +348,11 @@ class _AlerteState extends State<Alerte> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFFFFFFFF),
-              Color(0xFFDCDCDC),
+              Color.fromRGBO(255, 189, 89, 1),
+              Color.fromRGBO(255, 145, 77, 1),
+
+              //Color(0xFFFFFFFF),
+              // Color(0xFFDCDCDC),
             ],
           ));
     } else
@@ -359,8 +362,11 @@ class _AlerteState extends State<Alerte> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFFFFFFFF),
-              Color(0xFF0091ea),
+              Color.fromRGBO(255, 189, 89, 1),
+              Color.fromRGBO(255, 145, 77, 1),
+
+              //Color(0xFFFFFFFF),
+              //Color(0xFF0091ea),
             ],
           ));
   }

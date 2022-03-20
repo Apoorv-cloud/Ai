@@ -37,7 +37,8 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         //drawer: sideBar(),
-        body: pageUI());
+        body: //GoogleMapPage()
+            pageUI());
   }
 
   Widget checkloading() {

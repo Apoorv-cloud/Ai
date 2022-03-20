@@ -7,7 +7,7 @@ import 'package:emka_gps/components/explore_content_widget.dart';
 import 'package:emka_gps/components/explore_widget.dart';
 import 'package:emka_gps/components/recent_search_widget.dart';
 import 'package:emka_gps/components/search_menu_widget.dart';
-import 'package:emka_gps/components/search_widget.dart';
+import 'package:emka_gps/global/app_colors.dart';
 import 'package:emka_gps/helper/map_helper.dart';
 import 'package:emka_gps/helper/map_marker.dart';
 import 'package:emka_gps/models/device.dart';
@@ -15,22 +15,17 @@ import 'package:emka_gps/models/geoFence.dart';
 import 'package:emka_gps/models/position.dart';
 import 'package:emka_gps/providers/app_provider.dart';
 import 'package:emka_gps/providers/language.dart';
-import 'package:emka_gps/screens/leaflet_map.dart';
 import 'package:fluster/fluster.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:select_form_field/select_form_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../helper/ui_helper.dart';
-import 'formLogin_screen.dart';
 
 const d_grey = Color(0xFFEDECF2);
 
@@ -102,7 +97,7 @@ class _GoogleMapState extends State<GoogleMapPage>
       'https://img.icons8.com/office/80/000000/marker.png';
 
   /// Color of the cluster circle
-  final Color _clusterColor = Colors.blue;
+  final Color _clusterColor = Colors.orange;
 
   /// Color of the cluster text
   final Color _clusterTextColor = Colors.white;
@@ -330,16 +325,16 @@ class _GoogleMapState extends State<GoogleMapPage>
         parent: animationControllerExplore!, curve: Curves.ease);
     animation = Tween(begin: offsetExplore, end: open ? 760.0 - 122 : 0.0)
         .animate(curve)
-          ..addListener(() {
-            setState(() {
-              offsetExplore = animation.value;
-            });
-          })
-          ..addStatusListener((status) {
-            if (status == AnimationStatus.completed) {
-              isExploreOpen = open;
-            }
-          });
+      ..addListener(() {
+        setState(() {
+          offsetExplore = animation.value;
+        });
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          isExploreOpen = open;
+        }
+      });
     animationControllerExplore!.forward();
   }
 
@@ -357,16 +352,16 @@ class _GoogleMapState extends State<GoogleMapPage>
         CurvedAnimation(parent: animationControllerSearch!, curve: Curves.ease);
     animation = Tween(begin: offsetSearch, end: open ? 347.0 - 68.0 : 0.0)
         .animate(curve)
-          ..addListener(() {
-            setState(() {
-              offsetSearch = animation.value;
-            });
-          })
-          ..addStatusListener((status) {
-            if (status == AnimationStatus.completed) {
-              isSearchOpen = open;
-            }
-          });
+      ..addListener(() {
+        setState(() {
+          offsetSearch = animation.value;
+        });
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          isSearchOpen = open;
+        }
+      });
     animationControllerSearch!.forward();
   }
 
@@ -435,8 +430,8 @@ class _GoogleMapState extends State<GoogleMapPage>
       _mapCenter = LatLng(
           _positions[_posIndex].latitude, _positions[_posIndex].longitude);
 
-      setState(() {        _appProvider.setSelectedId(id: _positions[_posIndex].deviceId);
-
+      setState(() {
+        _appProvider.setSelectedId(id: _positions[_posIndex].deviceId);
       });
       _position = _appProvider.getPositionById(_positions[_posIndex].deviceId);
       _appProvider.setSelectedDevice(_positions[_posIndex].deviceId);
@@ -487,9 +482,10 @@ class _GoogleMapState extends State<GoogleMapPage>
     );
     Color circleColor;
     if (color == null)
-      circleColor = Color(0x7FFFFFFF);
+      circleColor = AppColors.lightBackground; //Color(0x7FFFFFFF);
     else
-      circleColor = Color(int.parse(color.replaceAll('#', '0x7F')));
+      circleColor =
+          Color(int.parse(color.replaceAll('#', '0xFF914DFF'))); //'0x7F'
 
     cirlcesSet.add(Circle(
         circleId: CircleId(id.toString()),
@@ -516,9 +512,10 @@ class _GoogleMapState extends State<GoogleMapPage>
     }
     Color polyColor;
     if (color == null)
-      polyColor = Color(0x7FFFFFFF);
+      polyColor = AppColors.lightBackground; //Color(0x7FFFFFFF);
     else
-      polyColor = Color(int.parse(color.replaceAll('#', '0x7F')));
+      polyColor =
+          Color(int.parse(color.replaceAll('#', '0xFF914DFF'))); //'0x7F'
     polygonSet.add(Polygon(
         polygonId: PolygonId(id.toString()),
         points: polygonCoords,
@@ -596,9 +593,10 @@ class _GoogleMapState extends State<GoogleMapPage>
                                         ),
                                         Expanded(
                                             child: Text(
-                                          username,
+                                          username.split("@").first,
                                           style: TextStyle(
-                                              color: Colors.blue, fontSize: 22),
+                                              color: Colors.orange,
+                                              fontSize: 18),
                                         )),
                                       ],
                                     ))),
@@ -636,12 +634,12 @@ class _GoogleMapState extends State<GoogleMapPage>
                                         text: _language.tMaintenancePaper(),
                                         icon: Icons.event_note_rounded,
                                         route: '/devicePaper'),
-                                    /*    
+                                    /*
                                        buildMenuItem(context,
                                       text: "Accessoires",
                                       icon: Icons.auto_awesome_mosaic_outlined,
                                       route: '/deviceAccessoires'),
-                                  
+
                               buildMenuItem(context,
                                   text: _language.tReport(),
                                   icon: Icons.report,
@@ -655,8 +653,14 @@ class _GoogleMapState extends State<GoogleMapPage>
                                   icon: Icons.drive_eta_rounded,
                                   route: '/driver'),
                                   */
+                                    SizedBox(
+                                      height: 10,
+                                    ),
                                     Divider(
                                       color: Colors.grey,
+                                    ),
+                                    SizedBox(
+                                      height: 4,
                                     ),
                                     buildMenuItem(context,
                                         text: _language.tSettings(),
@@ -668,7 +672,7 @@ class _GoogleMapState extends State<GoogleMapPage>
                             ),
                           ),
                         ),
-                     new TweenAnimationBuilder<double>(
+                      new TweenAnimationBuilder<double>(
                           tween: Tween<double>(begin: 0.0, end: value),
                           duration: Duration(milliseconds: 500),
                           builder: (_, double val, __) {
@@ -682,21 +686,19 @@ class _GoogleMapState extends State<GoogleMapPage>
                                   googleMapUI(),
                                   //explore
                                   ExploreWidget(
-                                          currentExplorePercent:
-                                              currentExplorePercent,
-                                          currentSearchPercent:
-                                              currentSearchPercent,
-                                          animateExplore: animateExplore,
-                                          isExploreOpen: isExploreOpen,
-                                          onVerticalDragUpdate:
-                                              onExploreVerticalUpdate,
-                                          onPanDown: () =>
-                                              animationControllerExplore
-                                                  ?.stop(),
-                                          language: _language,
-                                        ),
-                                      
-                                  /* 
+                                    currentExplorePercent:
+                                        currentExplorePercent,
+                                    currentSearchPercent: currentSearchPercent,
+                                    animateExplore: animateExplore,
+                                    isExploreOpen: isExploreOpen,
+                                    onVerticalDragUpdate:
+                                        onExploreVerticalUpdate,
+                                    onPanDown: () =>
+                                        animationControllerExplore?.stop(),
+                                    language: _language,
+                                  ),
+
+                                  /*
                               Visibility(
                                 visible: _visibility,
                                 child: ExploreWidget(
@@ -729,16 +731,16 @@ class _GoogleMapState extends State<GoogleMapPage>
                                           padding: const EdgeInsets.all(0),
                                         ),
                                   //explore content
-                                   ExploreContentWidget(
-                                        currentExplorePercent:
-                                            currentExplorePercent,
-                                        selectedId: _selectedId,
-                                        device: _device,
-                                        position: _position,
-                                        language: _language,
-                                        deviceCategory: _appProvider
-                                            .getDeviceCategoryByID(_selectedId),
-                                      ),
+                                  ExploreContentWidget(
+                                    currentExplorePercent:
+                                        currentExplorePercent,
+                                    selectedId: _selectedId,
+                                    device: _device,
+                                    position: _position,
+                                    language: _language,
+                                    deviceCategory: _appProvider
+                                        .getDeviceCategoryByID(_selectedId),
+                                  ),
 
                                   //recent search
                                   RecentSearchWidget(
@@ -806,8 +808,10 @@ class _GoogleMapState extends State<GoogleMapPage>
                                     isRight: false,
                                     icon: Icons.layers,
                                     gradient: const LinearGradient(colors: [
-                                      Color(0xFF59C2FF),
-                                      Color(0xFF1270E3),
+                                      Color.fromRGBO(255, 189, 89, 1),
+                                      Color.fromRGBO(255, 145, 77, 1),
+                                      //Color(0xFF59C2FF),
+                                      //Color(0xFF1270E3),
                                     ]),
                                     child: IconButton(
                                         onPressed: () {
@@ -926,9 +930,7 @@ class _GoogleMapState extends State<GoogleMapPage>
                                         )),
                                   ),
 */
-                                  ///
-
-                                  //fitBounds button
+//fitBounds button
 
                                   MapButton(
                                     currentSearchPercent: currentSearchPercent,
@@ -941,8 +943,11 @@ class _GoogleMapState extends State<GoogleMapPage>
                                     icon: Icons.car_rental,
                                     iconColor: Colors.white,
                                     gradient: const LinearGradient(colors: [
-                                      Color(0xFF59C2FF),
-                                      Color(0xFF1270E3),
+                                      Color.fromRGBO(255, 189, 89, 1),
+                                      Color.fromRGBO(255, 145, 77, 1),
+
+                                      //Color(0xFF59C2FF),
+                                      //Color(0xFF1270E3),
                                     ]),
                                     child: IconButton(
                                         onPressed: () {
@@ -967,7 +972,7 @@ class _GoogleMapState extends State<GoogleMapPage>
                                     width: 68,
                                     height: 71,
                                     icon: Icons.my_location,
-                                    iconColor: Colors.blue,
+                                    iconColor: Colors.orange,
                                     child: IconButton(
                                         onPressed: () {
                                           if (_positions.length != 0) {
@@ -978,7 +983,7 @@ class _GoogleMapState extends State<GoogleMapPage>
                                         icon: Icon(
                                           Icons.skip_next,
                                           size: realW(34),
-                                          color: Colors.black,
+                                          color: Colors.orange,
                                         )),
                                   ),
 
@@ -992,10 +997,13 @@ class _GoogleMapState extends State<GoogleMapPage>
                                     width: 68,
                                     height: 71,
                                     icon: Icons.my_location,
-                                    iconColor: Colors.blue,
+                                    iconColor: Colors.orange,
                                     gradient: const LinearGradient(colors: [
-                                      Color(0xFF59C2FF),
-                                      Color(0xFF1270E3),
+                                      Color.fromRGBO(255, 189, 89, 1),
+                                      Color.fromRGBO(255, 145, 77, 1),
+
+                                      //Color(0xFF59C2FF),
+                                      //Color(0xFF1270E3),
                                     ]),
                                     child: IconButton(
                                         onPressed: () {
@@ -1074,21 +1082,33 @@ class _GoogleMapState extends State<GoogleMapPage>
                                                           controller:
                                                               _selectedDeviceController,
                                                           //initialValue: _initialValue,
+
                                                           icon: Icon(
                                                             Icons.search,
+                                                            color:
+                                                                Colors.orange,
                                                           ),
                                                           labelText: _language
                                                               .tChooseDevice(),
+                                                          cursorColor:
+                                                              Colors.orange,
+                                                          autocorrect: true,
                                                           changeIcon: true,
-                                                          dialogTitle: _language
-                                                              .tDevices(),
+                                                          //dialogTitle: _language
+                                                          //  .tDevices(),
+                                                          dialogSearchHint:
+                                                              _language
+                                                                  .tSearch(),
+
                                                           dialogCancelBtn:
                                                               _language
                                                                   .tCancel(),
                                                           enableSearch: true,
-                                                          dialogSearchHint:
-                                                              _language
-                                                                  .tSearch(),
+
+                                                          style: TextStyle(
+                                                            color:
+                                                                Colors.orange,
+                                                          ),
                                                           items:
                                                               _selectSearchItemsDevice,
                                                           onChanged: (val) {
@@ -1152,7 +1172,8 @@ class _GoogleMapState extends State<GoogleMapPage>
                                               EdgeInsets.only(left: realW(17)),
                                           child: Icon(
                                             Icons.menu,
-                                            size: realW(34),
+                                            size: realW(30),
+                                            color: Colors.orange,
                                           ),
                                           decoration: BoxDecoration(
                                               color: Colors.white,

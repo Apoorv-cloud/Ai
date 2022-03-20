@@ -59,7 +59,7 @@ class TraccarClientService {
 
     var response = await http.post(
       Uri.parse(
-        'https://demo4.traccar.org/api/session',
+        'https://demo.traccar.org/api/session',
         //'https://tracking.emkatech.tn/api/session',
       ),
       body: ({'email': username, 'password': password}),

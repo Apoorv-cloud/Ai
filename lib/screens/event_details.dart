@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:arabic_numbers/arabic_numbers.dart';
 
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:emka_gps/models/events.dart';
 import 'package:emka_gps/models/geoFence.dart';
 import 'package:emka_gps/providers/app_provider.dart';
@@ -189,7 +189,7 @@ class _EventDetailsState extends State<EventDetails> {
     return new WillPopScope(
         onWillPop: () async => false,
         child: new Scaffold(
-            backgroundColor: Color(0xFF59C2FF),
+            backgroundColor: Colors.orange,
             appBar: AppBar(
               leading: IconButton(
                 icon: Icon(Icons.arrow_back),
@@ -200,8 +200,8 @@ class _EventDetailsState extends State<EventDetails> {
               ),
               title:
                   Text(_appProvider.getDeviceNameById(eventDetails.deviceId)),
-              backgroundColor: Color(0xFF149cf7),
-              centerTitle: true,
+              backgroundColor: Colors.orange,
+              //centerTitle: true,
             ),
             body: googleMapForDeviceTrackingUI()));
   }
@@ -305,7 +305,7 @@ class _EventDetailsState extends State<EventDetails> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SpinKitFadingFour(
-                color: Colors.blue,
+                color: Colors.orange,
                 size: 50.0,
               ),
               SizedBox(
@@ -313,14 +313,14 @@ class _EventDetailsState extends State<EventDetails> {
               ),
               Text(
                 _language.tLoading(),
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.orange),
               ),
               SizedBox(
                 height: 10,
               ),
               Text(
                 _language.tLoadingMoreTime(),
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.orange),
               )
             ],
           )),
@@ -334,8 +334,11 @@ class _EventDetailsState extends State<EventDetails> {
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
               colors: [
-            Color(0xFF1270E3),
-            Color(0xFF59C2FF),
+            Color.fromRGBO(255, 189, 89, 1),
+            Color.fromRGBO(255, 145, 77, 1),
+
+            //Color(0xFF1270E3),
+            //Color(0xFF59C2FF),
           ])),
       padding: EdgeInsets.only(left: 10, top: 10, right: 10),
       child: eventDetails != null
@@ -343,10 +346,10 @@ class _EventDetailsState extends State<EventDetails> {
               children: [
                 ListTile(
                     minLeadingWidth: 10,
-                  leading: Icon(
-                    Icons.access_alarm_sharp,
-                    color: Colors.white,
-                  ),
+                    leading: Icon(
+                      Icons.access_alarm_sharp,
+                      color: Colors.white,
+                    ),
                     title: Text(
                       _language.tNotifTime(),
                       style: TextStyle(color: Colors.white, fontSize: 16),
@@ -360,10 +363,10 @@ class _EventDetailsState extends State<EventDetails> {
                 eventDetails.geofenceId != 0
                     ? ListTile(
                         minLeadingWidth: 10,
-                  leading: Icon(
-                    Icons.arrow_right,
-                    color: Colors.white,
-                  ),
+                        leading: Icon(
+                          Icons.arrow_right,
+                          color: Colors.white,
+                        ),
                         title: Text(
                           _language.tGeoFenceName(),
                           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -378,11 +381,11 @@ class _EventDetailsState extends State<EventDetails> {
                     : SizedBox(),
                 eventDetails.type == "deviceOverspeed"
                     ? ListTile(
-                       minLeadingWidth: 10,
-                  leading: Icon(
-                    Icons.arrow_right,
-                    color: Colors.white,
-                  ),
+                        minLeadingWidth: 10,
+                        leading: Icon(
+                          Icons.arrow_right,
+                          color: Colors.white,
+                        ),
                         title: Text(
                           _language.tSpeedLimitNotif(),
                           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -399,11 +402,11 @@ class _EventDetailsState extends State<EventDetails> {
                     : SizedBox(),
                 eventDetails.type == "deviceOverspeed"
                     ? ListTile(
-                       minLeadingWidth: 10,
-                  leading: Icon(
-                    Icons.arrow_right,
-                    color: Colors.white,
-                  ),
+                        minLeadingWidth: 10,
+                        leading: Icon(
+                          Icons.arrow_right,
+                          color: Colors.white,
+                        ),
                         title: Text(
                           _language.tSpeed(),
                           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -417,13 +420,13 @@ class _EventDetailsState extends State<EventDetails> {
                           style: TextStyle(color: Colors.grey[100]),
                         ))
                     : SizedBox(),
-                    eventDetails.type == "deviceFuelDrop"
+                eventDetails.type == "deviceFuelDrop"
                     ? ListTile(
-                       minLeadingWidth: 10,
-                  leading: Icon(
-                    Icons.arrow_right,
-                    color: Colors.white,
-                  ),
+                        minLeadingWidth: 10,
+                        leading: Icon(
+                          Icons.arrow_right,
+                          color: Colors.white,
+                        ),
                         title: Text(
                           _language.tDeviceFuelDrop(),
                           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -432,18 +435,19 @@ class _EventDetailsState extends State<EventDetails> {
                           ((_appProvider
                                       .getDeviceById(eventDetails.deviceId)
                                       .attributes!
-                                      .fuelDropThreshold)! + _language.tLitre())
+                                      .fuelDropThreshold)! +
+                                  _language.tLitre())
                               .toString(),
                           style: TextStyle(color: Colors.grey[100]),
                         ))
                     : SizedBox(),
                 eventDetails.geofenceId != 0
                     ? ListTile(
-                       minLeadingWidth: 10,
-                  leading: Icon(
-                    Icons.arrow_right,
-                    color: Colors.white,
-                  ),
+                        minLeadingWidth: 10,
+                        leading: Icon(
+                          Icons.arrow_right,
+                          color: Colors.white,
+                        ),
                         title: Text(
                           _language.tGeoFenceDescription(),
                           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -458,11 +462,11 @@ class _EventDetailsState extends State<EventDetails> {
                     : SizedBox(),
                 eventDetails.maintenanceId != 0
                     ? ListTile(
-                       minLeadingWidth: 10,
-                  leading: Icon(
-                    Icons.arrow_right,
-                    color: Colors.white,
-                  ),
+                        minLeadingWidth: 10,
+                        leading: Icon(
+                          Icons.arrow_right,
+                          color: Colors.white,
+                        ),
                         title: Text(
                           _language.tMaintenanceName(),
                           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -476,11 +480,11 @@ class _EventDetailsState extends State<EventDetails> {
                     : SizedBox(),
                 eventDetails.maintenanceId != 0
                     ? ListTile(
-                       minLeadingWidth: 10,
-                  leading: Icon(
-                    Icons.arrow_right,
-                    color: Colors.white,
-                  ),
+                        minLeadingWidth: 10,
+                        leading: Icon(
+                          Icons.arrow_right,
+                          color: Colors.white,
+                        ),
                         title: Text(
                           _language.tLastVidange(),
                           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -502,11 +506,11 @@ class _EventDetailsState extends State<EventDetails> {
                     : SizedBox(),
                 eventDetails.maintenanceId != 0
                     ? ListTile(
-                       minLeadingWidth: 10,
-                  leading: Icon(
-                    Icons.arrow_right,
-                    color: Colors.white,
-                  ),
+                        minLeadingWidth: 10,
+                        leading: Icon(
+                          Icons.arrow_right,
+                          color: Colors.white,
+                        ),
                         title: Text(
                           _language.tPeriod(),
                           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -528,11 +532,11 @@ class _EventDetailsState extends State<EventDetails> {
                     : SizedBox(),
                 eventDetails.maintenanceId != 0
                     ? ListTile(
-                       minLeadingWidth: 10,
-                  leading: Icon(
-                    Icons.arrow_right,
-                    color: Colors.white,
-                  ),
+                        minLeadingWidth: 10,
+                        leading: Icon(
+                          Icons.arrow_right,
+                          color: Colors.white,
+                        ),
                         title: Text(_language.tNextVidange(),
                             style:
                                 TextStyle(color: Colors.white, fontSize: 16)),
@@ -560,11 +564,11 @@ class _EventDetailsState extends State<EventDetails> {
                     : SizedBox(),
                 eventDetails.maintenanceId != 0
                     ? ListTile(
-                       minLeadingWidth: 10,
-                  leading: Icon(
-                    Icons.arrow_right,
-                    color: Colors.white,
-                  ),
+                        minLeadingWidth: 10,
+                        leading: Icon(
+                          Icons.arrow_right,
+                          color: Colors.white,
+                        ),
                         title: Text(
                             eventDetails.type == 'hours'
                                 ? _language.tCraneHours()

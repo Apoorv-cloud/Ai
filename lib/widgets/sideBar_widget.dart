@@ -18,7 +18,7 @@ class sideBar extends StatelessWidget {
               accountEmail: new Text("this is the email address"),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Theme.of(context).platform == TargetPlatform.iOS
-                    ? Colors.blue
+                    ? Colors.orange
                     : Colors.white,
                 child: Text(
                   "M",

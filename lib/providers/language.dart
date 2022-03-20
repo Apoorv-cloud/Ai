@@ -467,7 +467,7 @@ class Language extends ChangeNotifier {
     if (getLanguage() == 'AR') {
       return "مركبات";
     } else if (getLanguage() == 'EN') {
-      return "Vehicles";
+      return "Devices";
     } else {
       return "Vehicules";
     }
@@ -837,7 +837,7 @@ class Language extends ChangeNotifier {
     if (getLanguage() == 'AR') {
       return " !! لم يتم اختيار مركبة";
     } else if (getLanguage() == 'EN') {
-      return "no vehicle selected !!";
+      return "No device selected!";
     } else {
       return "aucune vehicule selectionnée !!";
     }
@@ -847,7 +847,7 @@ class Language extends ChangeNotifier {
     if (getLanguage() == 'AR') {
       return " لتحديد السيارة ، ارجع إلى الشاشة الرئيسية  ";
     } else if (getLanguage() == 'EN') {
-      return "  to select a vehicle, return to home screen";
+      return "  To select a device, go back to home screen.";
     } else {
       return "pour sélectionner une véhicule, revenir à l'écran d'accueil";
     }
@@ -1067,7 +1067,7 @@ class Language extends ChangeNotifier {
     if (getLanguage() == 'AR') {
       return "اختر مركبة";
     } else if (getLanguage() == 'EN') {
-      return "Select a vehicle";
+      return "Select a device";
     } else {
       return "Sélectionner une vehicule";
     }

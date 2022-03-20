@@ -9,5 +9,6 @@ class AppColors {
   static final darkTextColor = Color.fromRGBO(34, 64, 67, 1);
   static final greyBackground = Color.fromRGBO(247, 247, 250, 1);
   static final appBarBackground = Color.fromRGBO(255, 145, 77, 1);
-  //static final appBarBackground = Color(0xFF149cf7);
+  static final lightBackground = Color.fromRGBO(236, 224, 216, 1.0);
+//static final appBarBackground = Color(0xFF149cf7);
 }
